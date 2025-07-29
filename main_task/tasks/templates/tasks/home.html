@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2d3748;
+        }
+
+        .task-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        .task-table th,
+        .task-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: left;
+        }
+
+        .task-table th {
+            background-color: #edf2f7;
+            color: #4a5568;
+        }
+
+        .task-table tr:hover {
+            background-color: #f7fafc;
+        }
+
+        .btn-delete,
+        .btn-update {
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-right: 5px;
+        }
+
+        .btn-delete {
+            background-color: #e53e3e;
+            color: white;
+        }
+
+        .btn-update {
+            background-color: #3182ce;
+            color: white;
+        }
+        .task-form {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .task-form input[type="submit"] {
+            background-color: #38a169;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .task-form input[type="submit"]:hover {
+            background-color: #2f855a;
+        }
+    </style>
+</head>
+
+
+<body>
+<div class="container">
+    <h1 class="page-title">📝 Task Manager</h1>
+
+    <table class="task-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Task</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.id }}</td>
+                    <td>{{ task.content }}</td>
+                    <td>{{ task.date_added }}</td>
+                    <td>
+                        <a href="{% url 'delete_page' task.id %}" class="btn-delete">Delete</a>
+                        <a href="{% url 'update_page' task.id %}" class="btn-update">Update</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <form method="POST" action ="/" class="task-form">
+        {% csrf_token %}
+        {{ form.content}}
+        <input type="submit" name="AddTask" value="AddTask">
+    </form>
+
+</div>
+
+
+</body>
+</html>

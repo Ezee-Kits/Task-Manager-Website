@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Task</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            max-width: 500px;
+            margin: 100px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .btn-cancel,
+        .btn-delete {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .btn-cancel {
+            background-color: #a0aec0;
+            color: white;
+        }
+
+        .btn-cancel:hover {
+            background-color: #718096;
+        }
+
+        .btn-delete {
+            background-color: #e53e3e;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: #c53030;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1> Are you sure you want to delete <strong> {{task.content}} </strong>  </h1>
+        <a href="{% url 'home_page' %}" class="btn-cancel"> Cancel </a>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Delete" class="btn-delete">
+        </form>        
+    </div>
+
+</body>
+</html>
